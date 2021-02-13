@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "newversion"
 version = "0.1.1"
-description = "SemVer helpers for PEP-440 versions"
+description = "PEP 440 version manager"
 authors = ["Vlad Emelianov <vlad.emelianov.nz@gmail.com>"]
 license = "MIT"
 readme = "README.md"

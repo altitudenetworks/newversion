@@ -4,7 +4,7 @@
 
 Main CLI parser.
 
-- [newversion](../README.md#newversion---semver-helpers-for-pep-440-versions) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Cli Parser
+- [newversion](../README.md#newversion---your-version-manager) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Cli Parser
     - [get_stdin](#get_stdin)
     - [parse_args](#parse_args)
 

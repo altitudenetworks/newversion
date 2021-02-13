@@ -124,7 +124,18 @@ class Executor:
         return self.input
 
     def _command_set(self) -> Version:
-        kwargs = {self.config.release: self.config.number}
+        value = self.config.value
+        if self.config.release == VersionParts.PRE:
+            if self.input.prerelease_type == VersionParts.ALPHA:
+                return self.input.replace(alpha=value)
+            if self.input.prerelease_type == VersionParts.BETA:
+                return self.input.replace(beta=value)
+            if self.input.prerelease_type == VersionParts.RC:
+                return self.input.replace(rc=value)
+
+            return self.input.replace(rc=value)
+
+        kwargs = {self.config.release: value}
         return self.input.replace(**kwargs)
 
     def _command_stable(self) -> Version:

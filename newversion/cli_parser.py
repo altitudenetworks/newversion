@@ -105,6 +105,7 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
             VersionParts.MAJOR,
             VersionParts.MINOR,
             VersionParts.MICRO,
+            VersionParts.PRE,
             VersionParts.POST,
             VersionParts.DEV,
             VersionParts.RC,
@@ -115,7 +116,7 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
         help="Release type",
     )
     parser_set.add_argument(
-        "number",
+        "value",
         type=int,
         help="Release number",
     )

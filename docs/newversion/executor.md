@@ -4,7 +4,7 @@
 
 CLI commands executor.
 
-- [newversion](../README.md#newversion---semver-helpers-for-pep-440-versions) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Executor
+- [newversion](../README.md#newversion---your-version-manager) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Executor
     - [Executor](#executor)
         - [Executor().execute](#executorexecute)
         - [Executor().input](#executorinput)

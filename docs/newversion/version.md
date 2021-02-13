@@ -4,7 +4,7 @@
 
 Extended `packaging.version.Version` implementation.
 
-- [newversion](../README.md#newversion---semver-helpers-for-pep-440-versions) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Version
+- [newversion](../README.md#newversion---your-version-manager) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Version
     - [Version](#version)
         - [Version().base](#versionbase)
         - [Version().base](#versionbase)

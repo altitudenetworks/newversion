@@ -4,7 +4,7 @@
 
 Constants used in project.
 
-- [newversion](../README.md#newversion---semver-helpers-for-pep-440-versions) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Constants
+- [newversion](../README.md#newversion---your-version-manager) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Constants
     - [VersionParts](#versionparts)
 
 ## VersionParts

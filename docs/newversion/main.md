@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [newversion.main](https://github.com/vemel/newversion/blob/master/newversion/main.py) module.
 
-- [newversion](../README.md#newversion---semver-helpers-for-pep-440-versions) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Main
+- [newversion](../README.md#newversion---your-version-manager) / [Modules](../MODULES.md#newversion-modules) / [Newversion](index.md#newversion) / Main
     - [CLIError](#clierror)
     - [main_api](#main_api)
     - [main_cli](#main_cli)

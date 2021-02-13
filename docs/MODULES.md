@@ -2,9 +2,9 @@
 
 > Auto-generated documentation modules index.
 
-Full list of [newversion](README.md#newversion---semver-helpers-for-pep-440-versions) project modules.
+Full list of [newversion](README.md#newversion---your-version-manager) project modules.
 
-- [NewVersion - SemVer helpers for PEP-440 versions](README.md#newversion---semver-helpers-for-pep-440-versions)
+- [NewVersion - Your version manager](README.md#newversion---your-version-manager)
 - [Newversion](newversion/index.md#newversion)
     - [Module](newversion/module.md#module)
     - [Cli Parser](newversion/cli_parser.md#cli-parser)
