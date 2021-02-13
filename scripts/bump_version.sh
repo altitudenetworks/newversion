@@ -32,5 +32,5 @@ if [[ `git diff --stat | grep pyproject` != "" ]]; then
     git add setup.cfg
     git commit -m "Bump version to ${VERSION}"
     git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/vemel/newversion.git --tags
-    git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/vemel/newversion.git HEAD:master
+    git push https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/vemel/newversion.git HEAD:main
 fi
