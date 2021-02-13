@@ -4,4 +4,4 @@ set -e
 ROOT_PATH=$(dirname $(dirname $0))
 cd $ROOT_PATH
 
-handsdown --external `git config --get remote.origin.url` -n newversion newversion --exclude '*/build/*' --cleanup --panic
+handsdown --external 'https://github.com/vemel/newversion/blob/main/' -n newversion newversion --exclude '*/build/*' --cleanup --panic

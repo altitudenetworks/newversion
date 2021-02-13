@@ -1,6 +1,6 @@
 # Module
 
-> Auto-generated documentation for [newversion.__main__](https://github.com/vemel/newversion/blob/master/newversion/__main__.py) module.
+> Auto-generated documentation for [newversion.__main__](https://github.com/vemel/newversion/blob/main/newversion/__main__.py) module.
 
 Main entrypoint for module.
 

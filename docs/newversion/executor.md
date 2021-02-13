@@ -1,6 +1,6 @@
 # Executor
 
-> Auto-generated documentation for [newversion.executor](https://github.com/vemel/newversion/blob/master/newversion/executor.py) module.
+> Auto-generated documentation for [newversion.executor](https://github.com/vemel/newversion/blob/main/newversion/executor.py) module.
 
 CLI commands executor.
 
@@ -13,7 +13,7 @@ CLI commands executor.
 
 ## Executor
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/executor.py#L16)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/executor.py#L16)
 
 ```python
 class Executor():
@@ -24,7 +24,7 @@ CLI commands executor.
 
 ### Executor().execute
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/executor.py#L32)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/executor.py#L32)
 
 ```python
 def execute() -> str:
@@ -38,7 +38,7 @@ Processed `Version`.
 
 ### Executor().input
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/executor.py#L24)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/executor.py#L24)
 
 ```python
 @property
@@ -51,7 +51,7 @@ def input() -> Version:
 
 ### Executor().other
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/executor.py#L28)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/executor.py#L28)
 
 ```python
 @property
@@ -64,7 +64,7 @@ def other() -> Version:
 
 ## ExecutorError
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/executor.py#L10)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/executor.py#L10)
 
 ```python
 class ExecutorError(Exception):

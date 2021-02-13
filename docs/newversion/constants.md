@@ -1,6 +1,6 @@
 # Constants
 
-> Auto-generated documentation for [newversion.constants](https://github.com/vemel/newversion/blob/master/newversion/constants.py) module.
+> Auto-generated documentation for [newversion.constants](https://github.com/vemel/newversion/blob/main/newversion/constants.py) module.
 
 Constants used in project.
 
@@ -9,7 +9,7 @@ Constants used in project.
 
 ## VersionParts
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/constants.py#L6)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/constants.py#L6)
 
 ```python
 class VersionParts():

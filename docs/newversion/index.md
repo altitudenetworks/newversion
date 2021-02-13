@@ -1,6 +1,6 @@
 # Newversion
 
-> Auto-generated documentation for [newversion](https://github.com/vemel/newversion/blob/master/newversion/__init__.py) module.
+> Auto-generated documentation for [newversion](https://github.com/vemel/newversion/blob/main/newversion/__init__.py) module.
 
 - [newversion](../README.md#newversion---your-version-manager) / [Modules](../MODULES.md#newversion-modules) / Newversion
     - Modules

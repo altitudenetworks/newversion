@@ -1,6 +1,6 @@
 # Cli Parser
 
-> Auto-generated documentation for [newversion.cli_parser](https://github.com/vemel/newversion/blob/master/newversion/cli_parser.py) module.
+> Auto-generated documentation for [newversion.cli_parser](https://github.com/vemel/newversion/blob/main/newversion/cli_parser.py) module.
 
 Main CLI parser.
 
@@ -10,7 +10,7 @@ Main CLI parser.
 
 ## get_stdin
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/cli_parser.py#L14)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/cli_parser.py#L14)
 
 ```python
 def get_stdin() -> Version:
@@ -28,7 +28,7 @@ Parsed version.
 
 ## parse_args
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/cli_parser.py#L30)
+[[find in source code]](https://github.com/vemel/newversion/blob/main/newversion/cli_parser.py#L30)
 
 ```python
 def parse_args(args: Sequence[str]) -> argparse.Namespace:
