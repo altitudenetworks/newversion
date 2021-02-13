@@ -1,17 +1,19 @@
-# newversion
+# NewVersion - SemVer helpers for PEP440
 
 > Auto-generated documentation index.
 
-Version manager compatible with packaging
+Version manager compatible with packaging.
 
 Full newversion project documentation can be found in [Modules](MODULES.md#newversion-modules)
 
-- [newversion](#newversion)
+- [NewVersion - SemVer helpers for PEP440](#newversion---semver-helpers-for-pep440)
     - [Installation](#installation)
     - [Usage](#usage)
     - [Versioning](#versioning)
     - [Latest changes](#latest-changes)
   - [newversion Modules](MODULES.md#newversion-modules)
+
+Heavily inspired by [semver](https://pypi.org/project/semver/).
 
 ## Installation
 
@@ -21,7 +23,7 @@ python -m pip install newversion
 
 ## Usage
 
-```
+```python
 from newversion import Version
 
 version = Version("1.2.3")

@@ -1,6 +1,8 @@
-# newversion
+# NewVersion - SemVer helpers for PEP440
 
-Version manager compatible with packaging
+Version manager compatible with packaging.
+
+Heavily inspired by [semver](https://pypi.org/project/semver/).
 
 ## Installation
 
@@ -10,7 +12,7 @@ python -m pip install newversion
 
 ## Usage
 
-```
+```python
 from newversion import Version
 
 version = Version("1.2.3")
