@@ -2,8 +2,32 @@
 name = "newversion"
 version = "0.1.0"
 description = "Version manager compatible with packaging"
-authors = ["Vlad Emelianov <volshebnyi@gmail.com>"]
+authors = ["Vlad Emelianov <vlad.emelianov.nz@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/vemel/newversion"
+include = ["LICENSE"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Typing :: Typed",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["version", "pep440"]
+
+[tool.poetry.urls]
+"Documentation" = "https://newversion.readthedocs.io/en/latest/"
+"Source" = "https://github.com/vemel/newversion"
+"Tracker" = "https://github.com/vemel/newversion/issues"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -17,6 +41,7 @@ pytest = "^6.2.2"
 flake8 = "^3.8.4"
 pytest-cov = "^2.11.1"
 codecov = "^2.1.11"
+twine = "^3.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

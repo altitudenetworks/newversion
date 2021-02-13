@@ -2,7 +2,8 @@
 
 > Auto-generated documentation index.
 
-Version manager compatible with packaging.
+[![PyPI - newversion](https://img.shields.io/pypi/v/newversion.svg?color=blue&label=newversion)](https://pypi.org/project/newversion)
+[![Docs](https://img.shields.io/readthedocs/newversion.svg?color=blue&label=Builder%20docs)](https://newversion.readthedocs.io/)
 
 Full newversion project documentation can be found in [Modules](MODULES.md#newversion-modules)
 
@@ -12,6 +13,11 @@ Full newversion project documentation can be found in [Modules](MODULES.md#newve
     - [Versioning](#versioning)
     - [Latest changes](#latest-changes)
   - [newversion Modules](MODULES.md#newversion-modules)
+
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/newversion.svg?color=blue)](https://pypi.org/project/newversion)
+[![Coverage](https://img.shields.io/codecov/c/github/vemel/newversion)](https://codecov.io/gh/vemel/newversion)
+
+Version manager compatible with packaging.
 
 Heavily inspired by [semver](https://pypi.org/project/semver/).
 
