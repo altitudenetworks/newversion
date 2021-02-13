@@ -1,0 +1,42 @@
+name: Bump version and publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.9"
+      - name: Extract variables from env
+        id: vars
+        run: |
+          echo "GitHub ref ${GITHUB_REF}"
+          VERSION=`echo "${GITHUB_REF}" | cut -f 3 -d "/"`
+
+          echo Version: ${VERSION}
+          echo "##[set-output name=version;]$(echo ${VERSION})"
+      - name: Install dependencies
+        run: |
+          python -m pip install -U poetry pip wheel
+          python -m poetry config virtualenvs.create false
+          python -m poetry install -n
+      - name: Bump version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.vars.outputs.version }}
+        run: |
+          scripts/bump_version.sh
+          python -m poetry install -n
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          poetry build
+          twine upload  --non-interactive dist/*
