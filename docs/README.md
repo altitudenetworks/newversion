@@ -8,15 +8,10 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/newversion.svg?color=blue)](https://pypi.org/project/newversion)
 [![Coverage](https://img.shields.io/codecov/c/github/vemel/newversion)](https://codecov.io/gh/vemel/newversion)
 
-- Follows [PEP 440](https://www.python.org/dev/peps/pep-0440/)
-- Fully compatible with [packaging.Version](https://packaging.pypa.io/en/latest/version.html)
-- Brings version bumping from [semver](https://pypi.org/project/semver/)
-- Comes with a helpful CLI tool `newversion`
-- Shines in CI
-
 Full newversion project documentation can be found in [Modules](MODULES.md#newversion-modules)
 
 - [NewVersion - Your version manager](#newversion---your-version-manager)
+  - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
     - [CLI](#cli)
@@ -24,6 +19,14 @@ Full newversion project documentation can be found in [Modules](MODULES.md#newve
   - [Versioning](#versioning)
   - [Latest changes](#latest-changes)
   - [newversion Modules](MODULES.md#newversion-modules)
+
+## Features
+
+- Follows [PEP 440](https://www.python.org/dev/peps/pep-0440/)
+- Fully compatible with [packaging.Version](https://packaging.pypa.io/en/latest/version.html)
+- Brings version bumping from [semver](https://pypi.org/project/semver/)
+- Comes with a helpful CLI tool `newversion`
+- Shines in CI
 
 ## Installation
 
