@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "newversion"
-version = "0.1.0"
+version = "0.1.1"
 description = "Version manager compatible with packaging"
 authors = ["Vlad Emelianov <vlad.emelianov.nz@gmail.com>"]
 license = "MIT"
