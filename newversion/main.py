@@ -3,7 +3,6 @@ import sys
 
 from newversion.cli_parser import parse_args
 from newversion.executor import Executor, ExecutorError
-from newversion.version import Version
 
 
 class CLIError(Exception):

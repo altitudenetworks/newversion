@@ -42,10 +42,11 @@ version.bump_minor().dumps() # "1.3.0"
 version.bump_major().dumps() # "2.0.0"
 
 # create and bump pre-releases
-version.bump_minor().bump_prerelease().dumps() # "1.3.0rc1"
-version.bump_prerelease("alpha").dumps() # "1.2.3a1"
+version.bump_prerelease().dumps() # "1.2.4rc1"
+version.bump_prerelease(bump_release="minor").dumps() # "1.3.0rc1"
+version.bump_prerelease("alpha").dumps() # "1.2.4a1"
 Version("1.2.3b4").bump_prerelease().dumps() # "1.2.3b5"
-version.get_devrelease(1234).dumps() # "1.2.3.dev1234"
+version.bump_micro().replace(dev=1234).dumps() # "1.2.4.dev1234"
 
 # and post-releases
 version.bump_postrelease().dumps() # "1.2.3.post1"

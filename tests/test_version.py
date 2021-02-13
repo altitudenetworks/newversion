@@ -1,4 +1,5 @@
 import pytest
+
 from newversion.version import Version, VersionError
 
 
