@@ -15,6 +15,8 @@ isort = "^5.7.0"
 handsdown = "^0.3.9"
 pytest = "^6.2.2"
 flake8 = "^3.8.4"
+pytest-cov = "^2.11.1"
+codecov = "^2.1.11"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
