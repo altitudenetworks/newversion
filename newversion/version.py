@@ -1,11 +1,14 @@
 """
 Extended `packaging.version.Version` implementation.
 """
-from typing import Optional, Tuple, Type, TypeVar
+from typing import Any, Dict, Optional, Tuple, Type, TypeVar
 
 from packaging.version import InvalidVersion
 from packaging.version import Version as PkgVersion
-from packaging.version import _Version as BaseVersion  # type: ignore
+from packaging.version import _Version as BaseVersion
+from typing_extensions import Literal
+
+from newversion.constants import VersionParts
 
 _R = TypeVar("_R", bound="Version")
 
@@ -39,6 +42,21 @@ class Version(PkgVersion):
         return str(self)
 
     @property
+    def prerelease_type(self) -> Optional[Literal["rc", "alpha", "beta"]]:
+        if not self.pre:
+            return None
+
+        letter = self.pre[0]
+        if letter == "rc":
+            return VersionParts.RC
+        if letter == "a":
+            return VersionParts.ALPHA
+        if letter == "b":
+            return VersionParts.BETA
+
+        return None
+
+    @property
     def base(self) -> BaseVersion:
         """
         Underlying version NamedTuple.
@@ -59,6 +77,36 @@ class Version(PkgVersion):
         new_version = self.copy()
         new_version.base = base
         return new_version.copy()
+
+    def bump_release(
+        self: _R,
+        release_type: Literal["major", "minor", "micro"] = VersionParts.MICRO,
+        inc: int = 1,
+    ) -> _R:
+        """
+        Get next release version.
+
+        Arguments:
+            release_type -- Release type: major, minor, micro.
+            inc -- Increment for major version.
+
+        Examples:
+
+            ```python
+            Version("1.2.3").bump_release()  # "1.2.4"
+            Version("1.2.3").bump_release("major")  # "2.0.0"
+            Version("1.2.3.dev14").bump_release("minor", 2)  # "1.4.0"
+            ```
+
+        Returns:
+            A new copy.
+        """
+        if release_type == VersionParts.MAJOR:
+            return self.bump_major(inc)
+        if release_type == VersionParts.MINOR:
+            return self.bump_minor(inc)
+
+        return self.bump_micro(inc)
 
     def bump_major(self: _R, inc: int = 1) -> _R:
         """
@@ -153,19 +201,28 @@ class Version(PkgVersion):
             )
         )
 
-    def bump_prerelease(self: _R, inc: int = 1, default_letter: str = "rc") -> _R:
+    def bump_prerelease(
+        self: _R,
+        inc: int = 1,
+        release_type: Literal["rc", "alpha", "beta", "a", "b"] = None,
+        bump_release: Literal["major", "minor", "micro"] = VersionParts.MICRO,
+    ) -> _R:
         """
         Get next prerelease version.
+        If version is stable - bump `micro` for a proper versioning as well.
+        Defaults to `rc` pre-releases.
 
         Arguments:
             inc -- Increment for micro version.
-            default_letter -- Prerelease letter if version is not a prerelease.
+            release_type -- Prerelease type: alpha, beta, rc.
+            bump_release -- Release number to bump if version is stable.
 
         Examples:
 
             ```python
-            Version("1.2.3").bump_prerelease()  # "1.2.3.rc1"
-            Version("1.2.3.dev14").bump_prerelease()  # "1.2.3.rc1"
+            Version("1.2.3").bump_prerelease()  # "1.2.4rc1"
+            Version("1.2.3").bump_prerelease(bump_release="major")  # "2.0.0rc1"
+            Version("1.2.3.dev14").bump_prerelease()  # "1.2.3rc1"
             Version("1.2.3a5").bump_prerelease()  # "1.2.3a6"
             Version("1.2.3rc3").bump_prerelease(2, "beta")  # "1.2.3rc5"
             ```
@@ -173,15 +230,22 @@ class Version(PkgVersion):
         Returns:
             A new copy.
         """
-        pre = (default_letter, max(inc, 1))
-        base_pre: Optional[Tuple[str, int]] = self._version.pre  # type: ignore
-        if base_pre:
-            pre = (base_pre[0], max(base_pre[1], 1) + inc)
+        prerelease_type = release_type or self.prerelease_type or VersionParts.RC
+        increment = inc if not self.base.pre else (max(self.base.pre[-1], 1) + inc)
+        pre = (prerelease_type, increment)
+
+        new_version = self._replace(self._copy_base(pre=pre))
+        if new_version < self:
+            prerelease_type = release_type or VersionParts.RC
+            new_version = self.bump_release(bump_release)
+
+        if prerelease_type != self.prerelease_type:
+            increment = inc
 
         base = BaseVersion(
             epoch=0,
-            release=self._version.release,  # type: ignore
-            pre=pre,
+            release=new_version.base.release,
+            pre=(prerelease_type, increment),
             post=None,
             dev=None,
             local=None,
@@ -207,13 +271,13 @@ class Version(PkgVersion):
         Returns:
             A new copy.
         """
-        post = ("post", max(inc, 1))
-        base_post: Optional[Tuple[str, int]] = self._version.post  # type: ignore
+        post = (VersionParts.POST, max(inc, 1))
+        base_post: Optional[Tuple[str, int]] = self._version.post
         if base_post:
-            post = ("post", max(base_post[1], 1) + inc)
+            post = (VersionParts.POST, max(base_post[1], 1) + inc)
         base = BaseVersion(
             epoch=0,
-            release=self._version.release,  # type: ignore
+            release=self._version.release,
             pre=None,
             post=post,
             dev=None,
@@ -221,38 +285,67 @@ class Version(PkgVersion):
         )
         return self._replace(base)
 
-    def get_devrelease(self: _R, number: int) -> _R:
+    def replace(
+        self: _R,
+        major: Optional[int] = None,
+        minor: Optional[int] = None,
+        micro: Optional[int] = None,
+        alpha: Optional[int] = None,
+        beta: Optional[int] = None,
+        rc: Optional[int] = None,
+        dev: Optional[int] = None,
+        post: Optional[int] = None,
+        epoch: Optional[int] = None,
+        local: Optional[str] = None,
+    ) -> _R:
         """
-        Get prerelease version from next version with `dev` postfix.
+        Modify version parts.
 
         Examples:
 
             ```python
-            Version("1.2.3").get_dev_prerelease(24) # "1.2.4.dev24"
-            Version("1.2.3rc5").get_dev_prerelease(17) # "1.2.4.dev17"
-            Version("1.2.3.dev20").get_dev_prerelease(21) # "1.2.3.dev21"
-            Version("1.2.3.post4").get_dev_prerelease(21) # "1.2.4.dev21"
+            Version("1.2.3").replace(dev=24) # "1.2.3.dev24"
+            Version("1.2.3rc5").replace(17) # "1.2.3.dev17"
             ```
 
         Arguments:
-            number -- Dev prerelease number.
+            major -- Major release number.
+            minor -- Minor release number.
+            micro -- Micro release number.
+            alpha -- Alpha pre-release number.
+            beta -- Beta pre-release number.
+            rc -- RC pre-release number.
+            dev -- Dev release number.
+            post -- Post release number.
+            epoch -- Release epoch.
+            local -- Local release identifier.
 
         Returns:
             A new instance.
         """
-        next_version = self.bump_micro()
-        if self.is_devrelease:
-            next_version = self.copy()
-
-        base = BaseVersion(
-            epoch=next_version.base.epoch,  # type: ignore
-            release=next_version.base.release,  # type: ignore
-            pre=next_version.base.pre,  # type: ignore
-            post=next_version.base.post,  # type: ignore
-            dev=("dev", number),
-            local=next_version.base.local,  # type: ignore
+        kwargs: Dict[str, Any] = dict(
+            release=(
+                major if major is not None else self.major,
+                minor if minor is not None else self.minor,
+                micro if micro is not None else self.micro,
+            )
         )
-        return self._replace(base)
+        if alpha is not None:
+            kwargs[VersionParts.PRE] = (VersionParts.ALPHA, alpha)
+        if beta is not None:
+            kwargs[VersionParts.PRE] = (VersionParts.BETA, beta)
+        if rc is not None:
+            kwargs[VersionParts.PRE] = (VersionParts.RC, rc)
+        if dev is not None:
+            kwargs[VersionParts.DEV] = (VersionParts.DEV, dev)
+        if post is not None:
+            kwargs[VersionParts.POST] = (VersionParts.POST, post)
+        if epoch is not None:
+            kwargs[VersionParts.EPOCH] = epoch
+        if local is not None:
+            kwargs[VersionParts.LOCAL] = [local]
+
+        return self._replace(self._copy_base(**kwargs))
 
     @property
     def is_stable(self) -> bool:
@@ -280,3 +373,18 @@ class Version(PkgVersion):
             A new instance.
         """
         return self.bump_micro(0)
+
+    def _copy_base(self, **kwargs: Any) -> BaseVersion:
+        base_kwargs = dict(
+            epoch=self.base.epoch,
+            release=self.base.release,
+            pre=self.base.pre,
+            post=self.base.post,
+            dev=self.base.dev,
+            local=self.base.local,
+        )
+        base_kwargs.update(kwargs)
+        return BaseVersion(**base_kwargs)
+
+    def get_major(self: _R, number: int) -> _R:
+        return self._replace(self._copy_base(release=(number, self.minor, self.micro)))

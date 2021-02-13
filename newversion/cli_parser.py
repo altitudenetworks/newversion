@@ -2,19 +2,27 @@
 Main CLI parser.
 """
 import argparse
-import select
 import sys
 from typing import Sequence
 
 import pkg_resources
 
+from newversion.constants import VersionParts
 from newversion.version import Version
 
 
 def get_stdin() -> Version:
-    if select.select([sys.stdin], [], [], 0.0)[0]:
-        for line in sys.stdin:
-            return Version(line.split(" ")[-1].strip())
+    """
+    Get input from stdin.
+
+    Returns:
+        Parsed version.
+    """
+    if sys.stdin.isatty():
+        return Version.zero()
+
+    for line in sys.stdin.readlines():
+        return Version(line.strip().split(" ")[-1])
 
     return Version.zero()
 
@@ -42,14 +50,23 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
         "-i",
         "--input",
         type=Version,
-        default=get_stdin(),
+        default=None,
         help="Input version, can be provided as a pipe-in as well.",
     )
     subparsers = parser.add_subparsers(help="Available subcommands", dest="command")
     parser_bump = subparsers.add_parser("bump", help="Bump current version")
     parser_bump.add_argument(
         "release",
-        choices=["major", "minor", "micro", "pre", "post"],
+        choices=[
+            VersionParts.MAJOR,
+            VersionParts.MINOR,
+            VersionParts.MICRO,
+            VersionParts.PRE,
+            VersionParts.POST,
+            VersionParts.RC,
+            VersionParts.ALPHA,
+            VersionParts.BETA,
+        ],
         nargs="?",
         default="micro",
         help="Release type. Default: micro",
@@ -59,13 +76,54 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
         type=int,
         default=1,
         nargs="?",
-        help="Increment. Default: 1",
+        help="Version increment. Default: 1",
+    )
+
+    parser_get = subparsers.add_parser("get", help="Get release number")
+    parser_get.add_argument(
+        "release",
+        choices=[
+            VersionParts.MAJOR,
+            VersionParts.MINOR,
+            VersionParts.MICRO,
+            VersionParts.PRE,
+            VersionParts.POST,
+            VersionParts.DEV,
+            VersionParts.RC,
+            VersionParts.ALPHA,
+            VersionParts.BETA,
+            VersionParts.EPOCH,
+            VersionParts.LOCAL,
+        ],
+        help="Release type",
+    )
+
+    parser_set = subparsers.add_parser("set", help="Set release number")
+    parser_set.add_argument(
+        "release",
+        choices=[
+            VersionParts.MAJOR,
+            VersionParts.MINOR,
+            VersionParts.MICRO,
+            VersionParts.POST,
+            VersionParts.DEV,
+            VersionParts.RC,
+            VersionParts.ALPHA,
+            VersionParts.BETA,
+            VersionParts.EPOCH,
+        ],
+        help="Release type",
+    )
+    parser_set.add_argument(
+        "number",
+        type=int,
+        help="Release number",
     )
 
     subparsers.add_parser("stable", help="Get stable release of current version")
     subparsers.add_parser(
         "is_stable",
-        help="Raise error if current version is a pre- or dev release",
+        help="Check if current version is not a pre- or dev release",
     )
     parser_lt = subparsers.add_parser(
         "lt",
@@ -117,4 +175,9 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
         help="Version to compare",
     )
 
-    return parser.parse_args(args)
+    result = parser.parse_args(args)
+
+    if result.input is None:
+        result.input = get_stdin()
+
+    return result

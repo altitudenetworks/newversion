@@ -12,7 +12,10 @@ class CLIError(Exception):
     """
 
 
-def main(config: argparse.Namespace) -> Version:
+def main_api(config: argparse.Namespace) -> str:
+    """
+    Main API entrypoint.
+    """
     executor = Executor(config)
     try:
         return executor.execute()
@@ -26,7 +29,9 @@ def main_cli() -> None:
     """
     config = parse_args(sys.argv[1:])
     try:
-        print(main(config).dumps())
+        output = main_api(config)
     except CLIError as e:
         sys.stderr.write(f"ERROR {e}\n")
         sys.exit(1)
+
+    sys.stdout.write(f"{output}\n")

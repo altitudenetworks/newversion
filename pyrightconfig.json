@@ -1,7 +1,4 @@
 {
-    "strict": [
-        "newversion"
-    ],
     "include": [
         "newversion"
     ],

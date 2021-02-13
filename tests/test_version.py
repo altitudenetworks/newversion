@@ -1,6 +1,5 @@
 import pytest
-
-from newversion.main import Version, VersionError
+from newversion.version import Version, VersionError
 
 
 class TestVersion:
@@ -41,11 +40,20 @@ class TestVersion:
         assert Version("1.2").bump_micro().dumps() == "1.2.1"
 
     def test_bump_prerelease(self):
-        assert Version("1.2.3").bump_prerelease().dumps() == "1.2.3rc1"
+        assert Version("1.2.3").bump_prerelease().dumps() == "1.2.4rc1"
         assert Version("1.2.3alpha").bump_prerelease().dumps() == "1.2.3a2"
         assert Version("1.2.3rc4").bump_prerelease(2).dumps() == "1.2.3rc6"
-        assert Version("1.2.3rc4").bump_prerelease(2, "alpha").dumps() == "1.2.3rc6"
-        assert Version("1.2.3").bump_prerelease(2, "alpha").dumps() == "1.2.3a2"
+        assert Version("1.2.3rc4").bump_prerelease(2, "alpha").dumps() == "1.2.4a2"
+        assert Version("1.2.3").bump_prerelease(2, "alpha").dumps() == "1.2.4a2"
+        assert (
+            Version("1.2.3").bump_prerelease(2, "alpha", "major").dumps() == "2.0.0a2"
+        )
+        assert (
+            Version("1.2.3a3").bump_prerelease(2, "alpha", "major").dumps() == "1.2.3a5"
+        )
+        assert (
+            Version("1.2.3a3").bump_prerelease(2, "rc", "major").dumps() == "1.2.3rc2"
+        )
 
     def test_bump_postrelease(self):
         assert Version("1.2.3").bump_postrelease().dumps() == "1.2.3.post1"
@@ -54,12 +62,13 @@ class TestVersion:
         assert Version("1.2.3.post").bump_postrelease().dumps() == "1.2.3.post2"
         assert Version("1.2.3").bump_postrelease(2).dumps() == "1.2.3.post2"
 
-    def test_get_devrelease(self):
-        assert Version("1.2.3").get_devrelease(45).dumps() == "1.2.4.dev45"
-        assert Version("1.2.3.dev14").get_devrelease(36).dumps() == "1.2.3.dev36"
-        assert Version("1.2.3-dev14").get_devrelease(45).dumps() == "1.2.3.dev45"
-        assert Version("1.2.3rc3").get_devrelease(45).dumps() == "1.2.4.dev45"
-        assert Version("1.2.3.post2").get_devrelease(45).dumps() == "1.2.4.dev45"
+    def test_replace(self):
+        assert Version("1.2.3").replace(dev=45).dumps() == "1.2.3.dev45"
+        assert Version("1.2.3.dev14").replace(dev=36).dumps() == "1.2.3.dev36"
+        assert Version("1.2.3-dev14").replace(dev=45).dumps() == "1.2.3.dev45"
+        assert Version("1.2.3rc3").replace(dev=45).dumps() == "1.2.3rc3.dev45"
+        assert Version("1.2.3rc3").replace(major=3).dumps() == "3.2.3rc3"
+        assert Version("1.2.3rc3").replace(local="test-1").dumps() == "1.2.3rc3+test.1"
 
     def test_get_stable(self):
         assert Version("1.2.3").get_stable().dumps() == "1.2.3"
