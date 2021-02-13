@@ -1,6 +1,17 @@
 # newversion
 
+> Auto-generated documentation index.
+
 Version manager compatible with packaging
+
+Full newversion project documentation can be found in [Modules](MODULES.md#newversion-modules)
+
+- [newversion](#newversion)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Versioning](#versioning)
+    - [Latest changes](#latest-changes)
+  - [newversion Modules](MODULES.md#newversion-modules)
 
 ## Installation
 

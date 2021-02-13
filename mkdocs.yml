@@ -1,0 +1,8 @@
+site_name: "Newversion"
+repo_url: "https://github.com/vemel/newversion/"
+site_dir: "site"
+docs_dir: "docs"
+
+theme:
+  name: readthedocs
+  include_sidebar: true

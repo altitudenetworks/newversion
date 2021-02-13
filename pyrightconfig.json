@@ -1,0 +1,19 @@
+{
+    "strict": [
+        "newversion"
+    ],
+    "include": [
+        "newversion"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "tests",
+        "typings"
+    ],
+    "pythonVersion": "3.7",
+    "reportMissingImports": false,
+    "reportMissingTypeStubs": false,
+    "reportMissingTypeArgument": false,
+    "reportIncompatibleMethodOverride": "error",
+    "reportIncompatibleVariableOverride": "error"
+}
