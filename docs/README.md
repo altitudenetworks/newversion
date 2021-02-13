@@ -1,4 +1,4 @@
-# NewVersion - SemVer helpers for PEP440
+# NewVersion - SemVer helpers for PEP-440 versions
 
 > Auto-generated documentation index.
 
@@ -7,7 +7,7 @@
 
 Full newversion project documentation can be found in [Modules](MODULES.md#newversion-modules)
 
-- [NewVersion - SemVer helpers for PEP440](#newversion---semver-helpers-for-pep440)
+- [NewVersion - SemVer helpers for PEP-440 versions](#newversion---semver-helpers-for-pep-440-versions)
     - [Installation](#installation)
     - [Usage](#usage)
     - [Versioning](#versioning)
@@ -17,9 +17,9 @@ Full newversion project documentation can be found in [Modules](MODULES.md#newve
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/newversion.svg?color=blue)](https://pypi.org/project/newversion)
 [![Coverage](https://img.shields.io/codecov/c/github/vemel/newversion)](https://codecov.io/gh/vemel/newversion)
 
-Version manager compatible with packaging.
-
-Heavily inspired by [semver](https://pypi.org/project/semver/).
+- Fully compatible with [packaging.Version](https://packaging.pypa.io/en/latest/version.html)
+- [semver](https://pypi.org/project/semver/)-style version bumping
+- Keeps `Version` immutable, as it should be
 
 ## Installation
 
@@ -33,6 +33,7 @@ python -m pip install newversion
 from newversion import Version
 
 version = Version("1.2.3")
+next_version = version.bump_minor() # Version("1.3.0")
 
 # bump version same way as SemVer
 version.dumps() # "1.2.3"
