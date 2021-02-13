@@ -26,10 +26,10 @@ Extended `packaging.version.Version` implementation.
 
 ## Version
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L20)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L19)
 
 ```python
-class Version(PkgVersion):
+class Version(packaging.version.Version):
     def __init__(version: str) -> None:
 ```
 
@@ -37,7 +37,7 @@ Extended `packaging.version.Version` implementation.
 
 ### Version().base
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L59)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L58)
 
 ```python
 @property
@@ -48,7 +48,7 @@ Underlying version NamedTuple.
 
 ### Version().base
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L66)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L65)
 
 ```python
 @base.setter
@@ -57,7 +57,7 @@ def base(base: BaseVersion) -> None:
 
 ### Version().bump_major
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L111)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L110)
 
 ```python
 def bump_major(inc: int = 1) -> _R:
@@ -85,7 +85,7 @@ A new copy.
 
 ### Version().bump_micro
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L173)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L172)
 
 ```python
 def bump_micro(inc: int = 1) -> _R:
@@ -113,7 +113,7 @@ A new copy.
 
 ### Version().bump_minor
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L142)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L141)
 
 ```python
 def bump_minor(inc: int = 1) -> _R:
@@ -141,7 +141,7 @@ A new copy.
 
 ### Version().bump_postrelease
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L255)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L254)
 
 ```python
 def bump_postrelease(inc: int = 1) -> _R:
@@ -168,7 +168,7 @@ A new copy.
 
 ### Version().bump_prerelease
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L204)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L203)
 
 ```python
 def bump_prerelease(
@@ -204,7 +204,7 @@ A new copy.
 
 ### Version().bump_release
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L81)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L80)
 
 ```python
 def bump_release(
@@ -234,7 +234,7 @@ A new copy.
 
 ### Version().copy
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L70)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L69)
 
 ```python
 def copy() -> _R:
@@ -244,7 +244,7 @@ Create a copy of a current version instance.
 
 ### Version().dumps
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L38)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L37)
 
 ```python
 def dumps() -> str:
@@ -254,7 +254,7 @@ Render to string.
 
 ### Version().get_major
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L389)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L388)
 
 ```python
 def get_major(number: int) -> _R:
@@ -262,7 +262,7 @@ def get_major(number: int) -> _R:
 
 ### Version().get_stable
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L360)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L359)
 
 ```python
 def get_stable() -> _R:
@@ -284,7 +284,7 @@ A new instance.
 
 ### Version().is_stable
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L350)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L349)
 
 ```python
 @property
@@ -299,7 +299,7 @@ True if it is stable.
 
 ### Version().prerelease_type
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L44)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L43)
 
 ```python
 @property
@@ -308,7 +308,7 @@ def prerelease_type() -> Optional[Literal['rc', 'alpha', 'beta']]:
 
 ### Version().replace
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L288)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L287)
 
 ```python
 def replace(
@@ -353,7 +353,7 @@ A new instance.
 
 ### Version.zero
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L31)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L30)
 
 ```python
 @classmethod
@@ -364,8 +364,8 @@ Get zero version `0.0.0`
 
 ## VersionError
 
-[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L16)
+[[find in source code]](https://github.com/vemel/newversion/blob/master/newversion/version.py#L15)
 
 ```python
-class VersionError(InvalidVersion):
+class VersionError(packaging.version.InvalidVersion):
 ```

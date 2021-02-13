@@ -3,8 +3,7 @@ Extended `packaging.version.Version` implementation.
 """
 from typing import Any, Dict, Optional, Tuple, Type, TypeVar
 
-from packaging.version import InvalidVersion
-from packaging.version import Version as PkgVersion
+import packaging.version
 from packaging.version import _Version as BaseVersion
 from typing_extensions import Literal
 
@@ -13,11 +12,11 @@ from newversion.constants import VersionParts
 _R = TypeVar("_R", bound="Version")
 
 
-class VersionError(InvalidVersion):
+class VersionError(packaging.version.InvalidVersion):
     pass
 
 
-class Version(PkgVersion):
+class Version(packaging.version.Version):
     """
     Extended `packaging.version.Version` implementation.
     """
@@ -25,7 +24,7 @@ class Version(PkgVersion):
     def __init__(self, version: str) -> None:
         try:
             super().__init__(version)
-        except InvalidVersion as e:
+        except packaging.version.InvalidVersion as e:
             raise VersionError(e)
 
     @classmethod
