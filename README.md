@@ -41,7 +41,7 @@ python setup.py --version  # 1.2.3
 python setup.py --version | newversion bump  # 1.2.4
 python setup.py --version | newversion get minor  # 2
 
-echo "1.2.3rc1" | newversion bump micro   # 1.2.4
+echo "1.2.3rc1" | newversion bump micro   # 1.2.3
 echo "1.2.3rc1" | newversion bump minor   # 1.3.0
 echo "1.2.3rc1" | newversion bump major   # 2.0.0
 echo "1.2.3rc1" | newversion bump pre     # 1.2.3rc2

@@ -127,6 +127,9 @@ class Version(packaging.version.Version):
         Returns:
             A new copy.
         """
+        if not self.is_stable and self.minor == 0 and self.micro == 0:
+            return self.get_stable().bump_major(inc - 1)
+
         return self._replace(
             BaseVersion(
                 epoch=0,
@@ -153,11 +156,16 @@ class Version(packaging.version.Version):
             Version("1.2.3a5").bump_minor()  # "1.3.0"
             Version("1.2.3rc3").bump_minor(2)  # "1.4.0"
             Version("1.2.3rc3").bump_minor(0)  # "1.2.0"
+            Version("1.3.0rc3").bump_minor()  # "1.3.0"
+            Version("1.3.0rc3").bump_minor(2)  # "1.4.0"
             ```
 
         Returns:
             A new copy.
         """
+        if not self.is_stable and self.micro == 0:
+            return self.get_stable().bump_minor(inc - 1)
+
         return self._replace(
             BaseVersion(
                 epoch=0,
@@ -189,6 +197,9 @@ class Version(packaging.version.Version):
         Returns:
             A new copy.
         """
+        if not self.is_stable:
+            return self.get_stable().bump_micro(inc - 1)
+
         return self._replace(
             BaseVersion(
                 epoch=0,
@@ -236,7 +247,7 @@ class Version(packaging.version.Version):
         new_version = self._replace(self._copy_base(pre=pre))
         if new_version < self:
             prerelease_type = release_type or VersionParts.RC
-            new_version = self.bump_release(bump_release)
+            new_version = self.get_stable().bump_release(bump_release)
 
         if prerelease_type != self.prerelease_type:
             increment = inc
@@ -371,7 +382,16 @@ class Version(packaging.version.Version):
         Returns:
             A new instance.
         """
-        return self.bump_micro(0)
+        return self._replace(
+            BaseVersion(
+                epoch=0,
+                release=(self.major, self.minor, self.micro),
+                pre=None,
+                post=None,
+                dev=None,
+                local=None,
+            )
+        )
 
     def _copy_base(self, **kwargs: Any) -> BaseVersion:
         base_kwargs = dict(
