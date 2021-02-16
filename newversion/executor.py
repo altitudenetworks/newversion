@@ -68,25 +68,13 @@ class Executor:
             return str(self.input.post[-1]) if self.input.post else "0"
 
         if release == VersionParts.ALPHA:
-            return (
-                str(self.input.pre[-1])
-                if self.input.pre and self.input.pre[0] == "a"
-                else "0"
-            )
+            return str(self.input.pre[-1]) if self.input.pre and self.input.pre[0] == "a" else "0"
 
         if release == VersionParts.BETA:
-            return (
-                str(self.input.pre[-1])
-                if self.input.pre and self.input.pre[0] == "b"
-                else "0"
-            )
+            return str(self.input.pre[-1]) if self.input.pre and self.input.pre[0] == "b" else "0"
 
         if release == VersionParts.RC:
-            return (
-                str(self.input.pre[-1])
-                if self.input.pre and self.input.pre[0] == "rc"
-                else "0"
-            )
+            return str(self.input.pre[-1]) if self.input.pre and self.input.pre[0] == "rc" else "0"
 
         if release == VersionParts.EPOCH:
             return str(self.input.epoch) if self.input.epoch else "0"
@@ -117,9 +105,7 @@ class Executor:
             VersionParts.ALPHA,
             VersionParts.BETA,
         ):
-            return self.input.bump_prerelease(
-                self.config.increment, self.config.release
-            )
+            return self.input.bump_prerelease(self.config.increment, self.config.release)
 
         return self.input
 
@@ -153,23 +139,17 @@ class Executor:
 
     def _command_lte(self) -> Version:
         if not (self.input <= self.other):
-            raise ExecutorError(
-                f"Version {self.input} is not lesser or equal to {self.other}"
-            )
+            raise ExecutorError(f"Version {self.input} is not lesser or equal to {self.other}")
         return self.input
 
     def _command_gt(self) -> Version:
         if not (self.input > self.other):
-            raise ExecutorError(
-                f"Version {self.input} is not greater than {self.other}"
-            )
+            raise ExecutorError(f"Version {self.input} is not greater than {self.other}")
         return self.input
 
     def _command_gte(self) -> Version:
         if not (self.input >= self.other):
-            raise ExecutorError(
-                f"Version {self.input} is not greater or equal to {self.other}"
-            )
+            raise ExecutorError(f"Version {self.input} is not greater or equal to {self.other}")
         return self.input
 
     def _command_eq(self) -> Version:

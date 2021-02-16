@@ -6,8 +6,8 @@ cd $ROOT_PATH
 
 npx pyright
 pytest
-black newversion tests
-isort newversion tests
+black .
+isort .
 flake8 newversion
 
 ./scripts/docs.sh

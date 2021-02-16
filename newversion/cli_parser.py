@@ -43,9 +43,7 @@ def parse_args(args: Sequence[str]) -> argparse.Namespace:
         "newversion",
         description="SemVer helpers for PEP-440 versions",
     )
-    parser.add_argument(
-        "-V", "--version", action="version", version=version, help="Show version"
-    )
+    parser.add_argument("-V", "--version", action="version", version=version, help="Show version")
     parser.add_argument(
         "-i",
         "--input",

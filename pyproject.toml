@@ -61,3 +61,20 @@ ignore_errors = true
 omit = [
     "tests/*",
 ]
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = [
+    "newversion",
+    "tests",
+]
+src_paths = []
+
+[tool.black]
+line-length = 100
+include = '(newversion|tests)/.*\.pyi?$'
+target-version = [
+    'py36',
+    'py37',
+    'py38',
+]

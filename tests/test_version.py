@@ -53,15 +53,9 @@ class TestVersion:
         assert Version("1.2.3rc4").bump_prerelease(2).dumps() == "1.2.3rc6"
         assert Version("1.2.3rc4").bump_prerelease(2, "alpha").dumps() == "1.2.4a2"
         assert Version("1.2.3").bump_prerelease(2, "alpha").dumps() == "1.2.4a2"
-        assert (
-            Version("1.2.3").bump_prerelease(2, "alpha", "major").dumps() == "2.0.0a2"
-        )
-        assert (
-            Version("1.2.3a3").bump_prerelease(2, "alpha", "major").dumps() == "1.2.3a5"
-        )
-        assert (
-            Version("1.2.3a3").bump_prerelease(2, "rc", "major").dumps() == "1.2.3rc2"
-        )
+        assert Version("1.2.3").bump_prerelease(2, "alpha", "major").dumps() == "2.0.0a2"
+        assert Version("1.2.3a3").bump_prerelease(2, "alpha", "major").dumps() == "1.2.3a5"
+        assert Version("1.2.3a3").bump_prerelease(2, "rc", "major").dumps() == "1.2.3rc2"
 
     def test_bump_postrelease(self):
         assert Version("1.2.3").bump_postrelease().dumps() == "1.2.3.post1"
